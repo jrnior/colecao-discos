@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API Coleção de Discos</title>
+  <link rel="stylesheet" href="/css/escuro.css">
+</head>
+<body>
+<main>
+  <h1>API Coleção de Discos</h1>
+  <p class="descricao">
+    API RESTful em Spring Boot para organizar sua coleção de discos: artistas, discos, gêneros,
+    faixas e capas, com paginação, HATEOAS e documentação Swagger.
+  </p>
+
+  <h2>Documentação</h2>
+  <div class="grade">
+    <a class="cartao" href="/docs.html"><strong>Swagger UI</strong><span>Documentação e testes dos endpoints (modo escuro/claro)</span></a>
+    <a class="cartao" href="/v3/api-docs"><strong>OpenAPI (JSON)</strong><span>Especificação da API</span></a>
+    <a class="cartao" href="/h2-console"><strong>Console H2</strong><span>JDBC URL: <code>jdbc:h2:mem:discosdb</code> &middot; usuário: <code>sa</code></span></a>
+  </div>
+
+  <h2>Recursos</h2>
+  <div class="grade">
+    <a class="cartao" href="/artistas"><strong>/artistas</strong><span>Artistas e bandas</span></a>
+    <a class="cartao" href="/discos"><strong>/discos</strong><span>Discos da coleção</span></a>
+    <a class="cartao" href="/generos"><strong>/generos</strong><span>Gêneros musicais</span></a>
+    <a class="cartao" href="/faixas"><strong>/faixas</strong><span>Faixas dos discos</span></a>
+    <a class="cartao" href="/capas"><strong>/capas</strong><span>Capas dos discos</span></a>
+  </div>
+
+  <footer>Projeto Final &mdash; Desenvolvimento de APIs com Spring Boot</footer>
+</main>
+</body>
+</html>

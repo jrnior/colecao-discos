@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API de Gerenciamento de Coleção de Discos</title>
+  <!-- CSS e JS do Swagger UI: já vêm embutidos no Springdoc -->
+  <link rel="stylesheet" href="/swagger-ui/swagger-ui.css">
+  <!-- Nosso CSS (modo escuro, rodapé e botão) -->
+  <link rel="stylesheet" href="/css/swagger-tema.css">
+</head>
+<body>
+  <button id="botao-tema" type="button"></button>
+
+  <!-- O Swagger aparece aqui, com a barra "Swagger" no topo -->
+  <div id="swagger-ui"></div>
+
+  <!-- Final da página -->
+  <footer id="rodape">
+
+    <details>
+      <summary>Descrição geral</summary>
+      <div class="conteudo">
+        <ul>
+          <li><b>Especificação:</b> OpenAPI 3 (documentação gerada com Swagger UI).</li>
+          <li><b>Codificação:</b> UTF-8. Envie e receba JSON em UTF-8 (acentos e caracteres especiais são aceitos).</li>
+          <li><b>Idioma:</b> português do Brasil. A documentação e as mensagens de erro estão em pt-BR; os textos cadastrados (nomes, títulos) podem estar em qualquer idioma.</li>
+          <li><b>Formato:</b> JSON. Nomes de campos e valores do formato do disco (<code>VINIL</code>, <code>CD</code>, <code>FITA_K7</code>, <code>DIGITAL</code>) devem ser enviados exatamente como na documentação.</li>
+          <li><b>Paginação:</b> toda listagem é paginada. A primeira página é a <b>0</b> (<code>?page=0</code>), o tamanho padrão é <b>10</b> e o máximo é <b>50</b> itens por página (<code>?size=50</code>).</li>
+          <li><b>Dados inválidos não são cadastrados:</b> campo vazio, texto acima do limite ou número fora da faixa retorna erro 400.</li>
+          <li><b>HATEOAS:</b> as respostas trazem <code>_links</code> para navegar entre os recursos.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Códigos de resposta</summary>
+      <div class="conteudo">
+        <table>
+          <tr><th>Código</th><th>Nome</th><th>Quando acontece</th></tr>
+          <tr><td>200</td><td>OK</td><td>consulta ou atualização realizada</td></tr>
+          <tr><td>201</td><td>Created</td><td>registro criado</td></tr>
+          <tr><td>204</td><td>No Content</td><td>registro excluído</td></tr>
+          <tr><td>400</td><td>Bad Request</td><td>dado inválido (campo vazio, acima do limite, formato inexistente)</td></tr>
+          <tr><td>404</td><td>Not Found</td><td>o id procurado não existe</td></tr>
+          <tr><td>409</td><td>Conflict</td><td>id informado não existe, valor duplicado ou registro em uso</td></tr>
+        </table>
+      </div>
+    </details>
+
+    <h2>Termos de serviço</h2>
+    <p><b>Quem usa esta API deve:</b></p>
+    <ul>
+      <li>enviar dados verdadeiros e dentro dos limites, para manter a coleção consistente;</li>
+      <li>cadastrar artistas, gêneros e capas <b>antes</b> de ligá-los a um disco, porque os ids informados precisam existir;</li>
+      <li>excluir primeiro o que depende de um registro (ex.: discos de um artista) antes de excluí-lo.</li>
+    </ul>
+
+    <h2>Licença</h2>
+    <p>
+      Projeto sob a licença <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT</a>,
+      uma das licenças de software livre mais abertas: permite usar, copiar, modificar e distribuir,
+      mantendo o aviso de copyright.
+    </p>
+  </footer>
+
+  <script src="/swagger-ui/swagger-ui-bundle.js"></script>
+  <script src="/swagger-ui/swagger-ui-standalone-preset.js"></script>
+  <script>
+    // 1) Carrega o Swagger (layout padrão, com a barra "Swagger" no topo)
+    //    lendo a especificação gerada pelo Springdoc
+    SwaggerUIBundle({
+      url: "/v3/api-docs",
+      dom_id: "#swagger-ui",
+      deepLinking: true,
+      presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+      layout: "StandaloneLayout",
+      tagsSorter: "alpha",
+      operationsSorter: "method"
+    });
+
+    // 2) Botão de modo escuro/claro: liga e desliga a classe "escuro" no <body>
+    var botao = document.getElementById("botao-tema");
+
+    function aplicarTema(escuro) {
+      document.body.classList.toggle("escuro", escuro);
+      botao.textContent = escuro ? "Modo claro" : "Modo escuro";
+    }
+
+    var escuro = localStorage.getItem("tema") === "escuro"; // padrão: claro
+    aplicarTema(escuro);
+
+    botao.addEventListener("click", function () {
+      escuro = !escuro;
+      localStorage.setItem("tema", escuro ? "escuro" : "claro"); // lembra a escolha
+      aplicarTema(escuro);
+    });
+  </script>
+</body>
+</html>
